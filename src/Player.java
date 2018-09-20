@@ -8,4 +8,8 @@ public class Player extends Entity {
         p.fill(90, 255, 255);
         p.rect(pos.x, pos.y, Main.SCL, Main.SCL);
     }
+
+    void update() {
+
+    }
 }

@@ -8,6 +8,8 @@ public abstract class Entity {
 
     PApplet p;
 
+    int health;
+
     public static int FORWARD, BACKWARD, LEFT, RIGHT;
 
     Entity(int x, int y, ID id) {
@@ -15,25 +17,30 @@ public abstract class Entity {
         vel = new PVector(0, 0);
         this.id = id;
 
+        health = 100;
+
         p = Main.processing;
 
         FORWARD = 1;
-        BACKWARD = -1;
-        LEFT = 2;
-        RIGHT = -2;
+        BACKWARD = 3;
+        LEFT = 4;
+        RIGHT = 2;
     }
 
-    void update() {
+    abstract void update();
+
+    void refresh() {
+        this.update();
+
         this.pos.add(this.vel);
     }
 
     abstract void show();
 
-    void move (int dir, int speed) {
-        vel.mult(0);
-        vel.add(1);
-        System.out.println(vel.mag());
-//        float angle = (dir * 90) * (p.PI/180);
-//        vel.rotate(angle);
+    void move (float dir, int speed) {
+        this.vel.x = speed;
+        this.vel.y = speed;
+        vel.rotate(p.QUARTER_PI + (p.HALF_PI * (dir + 1)));
+        vel.setMag(speed);
     }
 }
